@@ -16,13 +16,13 @@ var routes = [{
       var userLoggedIn = localStorage.getItem("logined");
       
       if (userLoggedIn != null) {
-        console.log(userLoggedIn);
+        
         resolve({
           component: HomePage})
       }
       else 
       {
-        console.log(userLoggedIn);
+        
         resolve({
           component: LoginPage})
       }
