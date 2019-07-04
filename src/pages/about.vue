@@ -3,9 +3,9 @@
     <f7-navbar title="About" back-link="Back"></f7-navbar>
     <f7-block-title>About My App</f7-block-title>
     <f7-segmented raised tag="p">
-      <f7-button @click="swpier(0)">Button</f7-button>
+      <f7-button @click="swpier(0)" active>Button</f7-button>
       <f7-button @click="swpier(1)">Button</f7-button>
-      <f7-button  @click="swpier(2)">Active</f7-button>
+      <f7-button @click="swpier(2)">Active</f7-button>
     </f7-segmented>
     <f7-swiper pagination>
       <f7-swiper-slide>
@@ -33,8 +33,15 @@ export default {
     swpier(index) {
       const self = this;
       const app = self.$f7;
+      var $$ = this.$$;
+      $$(".button").on("click", function(e) {
+        $$(".button").removeClass("button-active");
+        $$(this)
+          .toggleClass("button-active");
+      });
       var swiper = app.swiper.get(".swiper-container");
-          swiper.slideTo(index);
+      swiper.slideTo(index);
+      
     }
   }
 };
