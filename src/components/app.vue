@@ -71,6 +71,12 @@
       <!-- Catalog View -->
       <f7-view id="view-equipment" name="catalog" tab url="/catalog/"></f7-view>
 
+      <!-- Catalog View -->
+      <f7-view id="view-calendar" name="catalog" tab url="/catalog/"></f7-view>
+
+      <!-- Catalog View -->
+      <f7-view id="view-analysis" name="catalog" tab url="/catalog/"></f7-view>
+
       <!-- Settings View -->
       <f7-view id="view-settings" name="settings" tab url="/settings/"></f7-view>
     </f7-views>
