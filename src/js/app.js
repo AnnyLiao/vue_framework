@@ -1,6 +1,7 @@
 // Import Vue
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Axios from 'axios';
 
 // Import Framework7
 import Framework7 from './framework7-custom.js';
@@ -23,6 +24,7 @@ import home from '../pages/home.vue';
 // Init Framework7-Vue Plugin
 Framework7.use(Framework7Vue);
 Vue.use(VueRouter);
+window.Axios = Axios;
 
 const router = new VueRouter({
   routes: [{

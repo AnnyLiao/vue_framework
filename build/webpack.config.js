@@ -5,6 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+require("babel-polyfill");
 
 
 const path = require('path');
@@ -21,6 +22,7 @@ const isCordova = target === 'cordova';
 module.exports = {
   mode: env,
   entry: [
+    "babel-polyfill", 
     './src/js/app.js',
   ],
   output: {
@@ -54,8 +56,7 @@ module.exports = {
     })],
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.(js|jsx)$/,
         use: 'babel-loader',
         include: [
@@ -167,7 +168,9 @@ module.exports = {
       new OptimizeCSSPlugin({
         cssProcessorOptions: {
           safe: true,
-          map: { inline: false },
+          map: {
+            inline: false
+          },
         },
       }),
       new webpack.optimize.ModuleConcatenationPlugin(),
@@ -192,8 +195,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/app.css',
     }),
-    new CopyWebpackPlugin([
-      {
+    new CopyWebpackPlugin([{
         from: resolvePath('src/static'),
         to: resolvePath(isCordova ? 'cordova/www/static' : 'www/static'),
       },

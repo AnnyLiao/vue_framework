@@ -69,7 +69,7 @@
       <f7-view id="view-home" main tab tab-active url="/"></f7-view>
 
       <!-- Catalog View -->
-      <f7-view id="view-equipment" name="catalog" tab url="/catalog/"></f7-view>
+      <f7-view id="view-equipment" name="equipment" tab url="/equipment/"></f7-view>
 
       <!-- Catalog View -->
       <f7-view id="view-calendar" name="catalog" tab url="/catalog/"></f7-view>
