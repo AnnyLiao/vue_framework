@@ -59,7 +59,7 @@
           <f7-row>
             <f7-col width="15">
               <p>
-                <i class="icon material-icons">perm_data_setting</i>
+                <i :class="`icon material-icons ${item.StatusColor}`" :id="`icon-${item.MachineNumber}`">perm_data_setting</i>
                 {{item.MachineNumber}}
               </p>
               <p>{{item.MachineName}}</p>
@@ -127,38 +127,37 @@ export default {
       };
       vm.headers.headers.groupId = id;
       Axios.get(urlDashboard, this.headers).then(response => {
-        vm.total = response.data.data.length;
-        response.data.data.forEach(function(item) {
-          if (item.StatusColor == 3) {
-            vm.statusColor.Idle = vm.statusColor.Idle + 1;
-            // item.StatusColor = "color-theme-orange";
-          } else if (item.StatusColor == 4) {
-            vm.statusColor.abnormal = vm.statusColor.abnormal + 1;
-            // item.StatusColor = "color-theme-red";
-          } else if (item.StatusColor == 5) {
-            vm.statusColor.normal = vm.statusColor.normal + 1;
-            // item.StatusColor = "color-theme-green";
-          } else {
-            vm.statusColor.downTime = vm.statusColor.downTime + 1;
-            // item.StatusColor = "color-theme-gray";
-          }
-          item.Progress = Math.round(item.Progress);
-          item.PlanTimes = vm.TimeRefomate(item.PlanTimes);
-          vm.macAddress.push(item.MacAddress);
-          vm.data.push(item);
-        });
-        Statusdata.push({
-          category: "Category #1",
-          Idle: vm.statusColor.Idle,
-          abnormal: vm.statusColor.abnormal,
-          normal: vm.statusColor.normal,
-          downTime: vm.statusColor.downTime
-        });
-        vm.makeChart(Statusdata, id);
-        // this.macAddress.forEach(function(item) {
-        //   vm.getMachineData(item);
-        // });
-        vm.getMachineData(vm.macAddress, id);
+        if (response.data.data != null) {
+          vm.total = response.data.data.length;
+          response.data.data.forEach(function(item) {
+            if (item.StatusColor == 3) {
+              vm.statusColor.Idle = vm.statusColor.Idle + 1;
+              item.StatusColor = "color-theme-orange";
+            } else if (item.StatusColor == 4) {
+              vm.statusColor.abnormal = vm.statusColor.abnormal + 1;
+              item.StatusColor = "color-theme-red";
+            } else if (item.StatusColor == 5) {
+              vm.statusColor.normal = vm.statusColor.normal + 1;
+              item.StatusColor = "color-theme-green";
+            } else {
+              vm.statusColor.downTime = vm.statusColor.downTime + 1;
+              item.StatusColor = "color-theme-gray";
+            }
+            item.Progress = Math.round(item.Progress);
+            item.PlanTimes = vm.TimeRefomate(item.PlanTimes);
+            vm.macAddress.push(item.MacAddress);
+            vm.data.push(item);
+          });
+          Statusdata.push({
+            category: "StatusBar",
+            Idle: vm.statusColor.Idle,
+            abnormal: vm.statusColor.abnormal,
+            normal: vm.statusColor.normal,
+            downTime: vm.statusColor.downTime
+          });
+          vm.makeChart(Statusdata, id);
+          vm.getMachineData(vm.macAddress, id);
+        }
       });
     },
     async getMachineData(IDdata, id) {
