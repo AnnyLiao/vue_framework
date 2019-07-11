@@ -1,14 +1,7 @@
 <template>
   <f7-page :page-content="false">
-    <f7-navbar title="Tabbar Scrollable" back-link="Back">
-      <!-- <f7-nav-right>
-        <f7-link
-          icon-ios="f7:reload"
-          icon-aurora="f7:reload"
-          icon-md="material:compare_arrows"
-          @click="isBottom = !isBottom"
-        ></f7-link>
-      </f7-nav-right>-->
+    <f7-navbar >
+      
     </f7-navbar>
     <f7-toolbar tabbar scrollable :position="isBottom ? 'top' : 'bottom'">
       <f7-link
@@ -17,7 +10,7 @@
         :tab-link="`#tab-${tab}`"
         :tab-link-active="index === 0"
         @click="getGroupData(tab)"
-      >Tab {{tab}}</f7-link>
+      >第{{tabsC[index]}}車間</f7-link>
     </f7-toolbar>
     <f7-tabs>
       <f7-tab
@@ -55,7 +48,7 @@
         </f7-row>
 
         <!-- 單一機台狀態 Section -->
-        <f7-block strong inset v-for="(item, index) in data" :key="index">
+        <f7-block strong inset v-for="(item, index) in data" :key="index" id="tab-block">
           <f7-row>
             <f7-col width="15">
               <p>
@@ -94,6 +87,7 @@ export default {
   data() {
     return {
       tabs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      tabsC : ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"],
       isBottom: true,
       headers: {
         headers: {
@@ -125,6 +119,15 @@ export default {
         abnormal: 0,
         normal: 0
       };
+
+      // control tab active class
+      var $$ = this.$$;
+      $$(".link .tab-link").on("click", function(e) {
+        $$(".link .tab-link").removeClass("tab-link-active");
+        $$(this)
+          .toggleClass("tab-link-active");
+      });
+
       vm.headers.headers.groupId = id;
       Axios.get(urlDashboard, this.headers).then(response => {
         if (response.data.data != null) {
@@ -284,7 +287,7 @@ export default {
         series.name = name;
         // series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
         series.stacked = stacked;
-        series.columns.template.stroke = am4core.color("#ffffff");
+        series.columns.template.stroke = am4core.color("#ddf1fb");
         series.columns.template.fill = am4core.color(color);
         series.columns.template.width = am4core.percent(100);
       }
@@ -333,3 +336,10 @@ export default {
   }
 };
 </script>
+<style>
+#tab-block {
+  background-color: #ddf1fb;
+  color: #757575;
+
+}
+</style>

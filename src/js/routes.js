@@ -1,5 +1,5 @@
 import LoginPage from '../pages/login.vue';
-import HomePage from '../pages/home.vue';
+import HomePage from '../pages/equipment.vue';
 import AboutPage from '../pages/about.vue';
 import FormPage from '../pages/form.vue';
 import CatalogPage from '../pages/catalog.vue';
@@ -55,7 +55,7 @@ var routes = [{
   },
   {
     path: '/equipment/',
-    component: equipment
+    component: AboutPage
   },
 
   {
