@@ -1,11 +1,13 @@
 import LoginPage from '../pages/login.vue';
-import HomePage from '../pages/equipment.vue';
-import AboutPage from '../pages/about.vue';
+import HomePage from '../pages/dashboard.vue';
+import EquipmentPage from '../pages/equipment.vue';
 import FormPage from '../pages/form.vue';
 import CatalogPage from '../pages/catalog.vue';
 import ProductPage from '../pages/product.vue';
 import SettingsPage from '../pages/settings.vue';
-import equipment from '../pages/equipment.vue';
+import DashboardPage from '../pages/dashboard.vue';
+import TimelinePage from '../pages/timeline.vue';
+import AnalysisPage from '../pages/analysis.vue';
 
 import DynamicRoutePage from '../pages/dynamic-route.vue';
 import RequestAndLoad from '../pages/request-and-load.vue';
@@ -34,8 +36,16 @@ var routes = [{
     component: LoginPage,
   },
   {
-    path: '/about/',
-    component: AboutPage,
+    path: '/equipment/',
+    component: EquipmentPage,
+  },
+  {
+    path: '/timeline/',
+    component: TimelinePage,
+  },
+  {
+    path: '/analysis/',
+    component: AnalysisPage
   },
   {
     path: '/form/',
@@ -53,11 +63,6 @@ var routes = [{
     path: '/settings/',
     component: SettingsPage,
   },
-  {
-    path: '/equipment/',
-    component: AboutPage
-  },
-
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
     component: DynamicRoutePage,
