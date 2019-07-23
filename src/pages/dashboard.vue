@@ -1,8 +1,6 @@
 <template>
   <f7-page :page-content="false">
-    <f7-navbar >
-      
-    </f7-navbar>
+    <f7-navbar></f7-navbar>
     <f7-toolbar tabbar scrollable :position="isBottom ? 'top' : 'bottom'">
       <f7-link
         v-for="(tab, index) in tabs"
@@ -23,7 +21,7 @@
         <!-- machine status block -->
         <f7-block>
           <f7-row>
-            <f7-col width="100" tablet-width="100">
+            <f7-col width="100" tablet-width="100" style="font-size: smaller;">
               <i class="icon material-icons color-theme-green">stop</i>
               正常 {{statusColor.normal}} 台
               <i
@@ -52,7 +50,10 @@
           <f7-row>
             <f7-col width="15">
               <p>
-                <i :class="`icon material-icons ${item.StatusColor}`" :id="`icon-${item.MachineNumber}`">perm_data_setting</i>
+                <i
+                  :class="`icon material-icons ${item.StatusColor}`"
+                  :id="`icon-${item.MachineNumber}`"
+                >perm_data_setting</i>
                 {{item.MachineNumber}}
               </p>
               <p>{{item.MachineName}}</p>
@@ -86,8 +87,8 @@ import { contains } from "@amcharts/amcharts4/.internal/core/utils/DOM";
 export default {
   data() {
     return {
-      tabs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      tabsC : ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"],
+      tabs: [1, 2, 3],
+      tabsC: ["一", "二", "三"],
       isBottom: true,
       headers: {
         headers: {
@@ -124,8 +125,7 @@ export default {
       var $$ = this.$$;
       $$(".link .tab-link").on("click", function(e) {
         $$(".link .tab-link").removeClass("tab-link-active");
-        $$(this)
-          .toggleClass("tab-link-active");
+        $$(this).toggleClass("tab-link-active");
       });
 
       vm.headers.headers.groupId = id;
@@ -193,6 +193,33 @@ export default {
       // valueAxis.renderer.minWidth = 10;
       valueAxis.strictMinMax = true;
       valueAxis.renderer.grid.template.disabled = true;
+      valueAxis.renderer.labels.template.disabled = true;
+      // valueAxis.renderer.minGridDistance = 1;
+
+      //set bar value axis min and max
+      function createGrid(value) {
+        var range = valueAxis.axisRanges.create();
+        range.value = value;
+        range.label.text = "{value}";
+      }
+
+      var anotherData = {
+        Idle: data[0].Idle,
+        abnormal: data[0].abnormal,
+        downTime: data[0].downTime,
+        normal: data[0].normal
+      };
+
+      var arr = Object.keys(anotherData).map(function(key) {
+        return anotherData[key];
+      }); //get object value to array
+
+      function SumDatareduce(arr) {
+        return arr.reduce((a, b) => a + b);
+      }; //sum of array value
+
+      createGrid(0);
+      createGrid(SumDatareduce(arr));
 
       // Create series
       var series = chart.series.push(new am4charts.ColumnSeries());
@@ -340,6 +367,5 @@ export default {
 #tab-block {
   background-color: #ddf1fb;
   color: #757575;
-
 }
 </style>

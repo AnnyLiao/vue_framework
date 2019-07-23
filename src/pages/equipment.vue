@@ -15,6 +15,7 @@
               <option hidden>Choose</option>
               <option value="1">第一車間</option>
               <option value="2">第二車間</option>
+              <option value="3">第三車間</option>
             </f7-input>
           </f7-col>
           <f7-col width="30">
@@ -41,16 +42,95 @@
       </f7-block>
     </f7-navbar>
     <f7-block>
-      <f7-segmented raised tag="p">
+      <f7-segmented raised tag="p" tabbar>
         <f7-button
           v-for="(btn, index) in segment_btn"
           :key="btn"
-          :active="index === 0"
+          :tab-link="`#equiptab-${index+1}`"
+          :tab-link-active="index === 0"
           @click="swpier(index)"
           outline
         >{{btn}}</f7-button>
       </f7-segmented>
-      <f7-swiper pagination>
+      <f7-tabs swipeable>
+        <f7-tab :id="`equiptab-1`" tab-active>
+          <f7-block>
+            <p>Tab 3 content</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam enim quia molestiae facilis laudantium voluptates obcaecati officia cum, sit libero commodi. Ratione illo suscipit temporibus sequi iure ad laboriosam accusamus?</p>
+            <p>Saepe explicabo voluptas ducimus provident, doloremque quo totam molestias! Suscipit blanditiis eaque exercitationem praesentium reprehenderit, fuga accusamus possimus sed, sint facilis ratione quod, qui dignissimos voluptas! Aliquam rerum consequuntur deleniti.</p>
+            <p>Totam reprehenderit amet commodi ipsum nam provident doloremque possimus odio itaque, est animi culpa modi consequatur reiciendis corporis libero laudantium sed eveniet unde delectus a maiores nihil dolores? Natus, perferendis.</p>
+            <p>Atque quis totam repellendus omnis alias magnam corrupti, possimus aspernatur perspiciatis quae provident consequatur minima doloremque blanditiis nihil maxime ducimus earum autem. Magni animi blanditiis similique iusto, repellat sed quisquam!</p>
+            <p>Suscipit, facere quasi atque totam. Repudiandae facilis at optio atque, rem nam, natus ratione cum enim voluptatem suscipit veniam! Repellat, est debitis. Modi nam mollitia explicabo, unde aliquid impedit! Adipisci!</p>
+            <p>Deserunt adipisci tempora asperiores, quo, nisi ex delectus vitae consectetur iste fugiat iusto dolorem autem. Itaque, ipsa voluptas, a assumenda rem, dolorum porro accusantium, officiis veniam nostrum cum cumque impedit.</p>
+            <p>Laborum illum ipsa voluptatibus possimus nesciunt ex consequatur rem, natus ad praesentium rerum libero consectetur temporibus cupiditate atque aspernatur, eaque provident eligendi quaerat ea soluta doloremque. Iure fugit, minima facere.</p>
+          </f7-block>
+        </f7-tab>
+        <f7-tab :id="`equiptab-2`">
+          <f7-block inset strong class="text-align-center">
+            <f7-row>
+              <f7-col>
+                <h1>U</h1>
+                <f7-col id="Chart_U"></f7-col>
+                <h4>
+                  <i class="icon material-icons">history</i>
+                  {{Today_UAPQ.U}}
+                </h4>
+              </f7-col>
+              <f7-col>
+                <h1>A</h1>
+                <f7-col id="Chart_A"></f7-col>
+                <h4>
+                  <i class="icon material-icons">history</i>
+                  {{Today_UAPQ.A}}
+                </h4>
+              </f7-col>
+            </f7-row>
+            <f7-row>
+              <f7-col>
+                <h1>P</h1>
+                <f7-col id="Chart_P"></f7-col>
+                <h4>
+                  <i class="icon material-icons">history</i>
+                  {{Today_UAPQ.P}}
+                </h4>
+              </f7-col>
+              <f7-col>
+                <h1>Q</h1>
+                <f7-col id="Chart_Q"></f7-col>
+                <h4>
+                  <i class="icon material-icons">history</i>
+                  {{Today_UAPQ.Q}}
+                </h4>
+              </f7-col>
+            </f7-row>
+          </f7-block>
+        </f7-tab>
+        <f7-tab :id="`equiptab-3`">
+          <f7-block>
+            <p>Tab 3 content</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam enim quia molestiae facilis laudantium voluptates obcaecati officia cum, sit libero commodi. Ratione illo suscipit temporibus sequi iure ad laboriosam accusamus?</p>
+            <p>Saepe explicabo voluptas ducimus provident, doloremque quo totam molestias! Suscipit blanditiis eaque exercitationem praesentium reprehenderit, fuga accusamus possimus sed, sint facilis ratione quod, qui dignissimos voluptas! Aliquam rerum consequuntur deleniti.</p>
+            <p>Totam reprehenderit amet commodi ipsum nam provident doloremque possimus odio itaque, est animi culpa modi consequatur reiciendis corporis libero laudantium sed eveniet unde delectus a maiores nihil dolores? Natus, perferendis.</p>
+            <p>Atque quis totam repellendus omnis alias magnam corrupti, possimus aspernatur perspiciatis quae provident consequatur minima doloremque blanditiis nihil maxime ducimus earum autem. Magni animi blanditiis similique iusto, repellat sed quisquam!</p>
+            <p>Suscipit, facere quasi atque totam. Repudiandae facilis at optio atque, rem nam, natus ratione cum enim voluptatem suscipit veniam! Repellat, est debitis. Modi nam mollitia explicabo, unde aliquid impedit! Adipisci!</p>
+            <p>Deserunt adipisci tempora asperiores, quo, nisi ex delectus vitae consectetur iste fugiat iusto dolorem autem. Itaque, ipsa voluptas, a assumenda rem, dolorum porro accusantium, officiis veniam nostrum cum cumque impedit.</p>
+            <p>Laborum illum ipsa voluptatibus possimus nesciunt ex consequatur rem, natus ad praesentium rerum libero consectetur temporibus cupiditate atque aspernatur, eaque provident eligendi quaerat ea soluta doloremque. Iure fugit, minima facere.</p>
+          </f7-block>
+        </f7-tab>
+        <f7-tab :id="`equiptab-4`">
+          <f7-block>
+            <p>Tab 3 content</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam enim quia molestiae facilis laudantium voluptates obcaecati officia cum, sit libero commodi. Ratione illo suscipit temporibus sequi iure ad laboriosam accusamus?</p>
+            <p>Saepe explicabo voluptas ducimus provident, doloremque quo totam molestias! Suscipit blanditiis eaque exercitationem praesentium reprehenderit, fuga accusamus possimus sed, sint facilis ratione quod, qui dignissimos voluptas! Aliquam rerum consequuntur deleniti.</p>
+            <p>Totam reprehenderit amet commodi ipsum nam provident doloremque possimus odio itaque, est animi culpa modi consequatur reiciendis corporis libero laudantium sed eveniet unde delectus a maiores nihil dolores? Natus, perferendis.</p>
+            <p>Atque quis totam repellendus omnis alias magnam corrupti, possimus aspernatur perspiciatis quae provident consequatur minima doloremque blanditiis nihil maxime ducimus earum autem. Magni animi blanditiis similique iusto, repellat sed quisquam!</p>
+            <p>Suscipit, facere quasi atque totam. Repudiandae facilis at optio atque, rem nam, natus ratione cum enim voluptatem suscipit veniam! Repellat, est debitis. Modi nam mollitia explicabo, unde aliquid impedit! Adipisci!</p>
+            <p>Deserunt adipisci tempora asperiores, quo, nisi ex delectus vitae consectetur iste fugiat iusto dolorem autem. Itaque, ipsa voluptas, a assumenda rem, dolorum porro accusantium, officiis veniam nostrum cum cumque impedit.</p>
+            <p>Laborum illum ipsa voluptatibus possimus nesciunt ex consequatur rem, natus ad praesentium rerum libero consectetur temporibus cupiditate atque aspernatur, eaque provident eligendi quaerat ea soluta doloremque. Iure fugit, minima facere.</p>
+          </f7-block>
+        </f7-tab>
+      </f7-tabs>
+      <!-- <f7-swiper pagination>
         <f7-swiper-slide>
           <f7-block inset strong>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni molestiae laudantium dignissimos est nobis delectus nemo ea alias voluptatum architecto, amet similique, saepe iste consectetur in repellat ut minus quibusdam!</p>
@@ -100,7 +180,7 @@
         </f7-swiper-slide>
         <f7-swiper-slide>Slide 3</f7-swiper-slide>
         <f7-swiper-slide>Slide 3</f7-swiper-slide>
-      </f7-swiper>
+      </f7-swiper> -->
     </f7-block>
   </f7-page>
 </template>
@@ -109,7 +189,25 @@
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import {
+  f7Navbar,
+  f7Page,
+  f7Block,
+  f7Tabs,
+  f7Tab,
+  f7Link,
+  f7Toolbar
+} from "framework7-vue";
 export default {
+  components: {
+    f7Navbar,
+    f7Page,
+    f7Block,
+    f7Tabs,
+    f7Tab,
+    f7Link,
+    f7Toolbar
+  },
   data() {
     return {
       segment_btn: ["即時", "UAPQ", "品質", "週期"],
@@ -329,7 +427,7 @@ export default {
     }
   },
   mounted() {
-    this.swpier(0);
+    // this.swpier(0);
 
     // this.getEquipment(1);
   }

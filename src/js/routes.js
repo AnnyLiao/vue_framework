@@ -2,12 +2,13 @@ import LoginPage from '../pages/login.vue';
 import HomePage from '../pages/dashboard.vue';
 import EquipmentPage from '../pages/equipment.vue';
 import FormPage from '../pages/form.vue';
-import CatalogPage from '../pages/catalog.vue';
+import SetUpPage from '../pages/set_up.vue';
 import ProductPage from '../pages/product.vue';
 import SettingsPage from '../pages/settings.vue';
 import DashboardPage from '../pages/dashboard.vue';
 import TimelinePage from '../pages/timeline.vue';
 import AnalysisPage from '../pages/analysis.vue';
+import DMPage from '../pages/dashboard_manage.vue';
 
 import DynamicRoutePage from '../pages/dynamic-route.vue';
 import RequestAndLoad from '../pages/request-and-load.vue';
@@ -52,8 +53,12 @@ var routes = [{
     component: FormPage,
   },
   {
-    path: '/catalog/',
-    component: CatalogPage,
+    path: '/setUp/',
+    component: SetUpPage,
+  },
+  {
+    path: '/dashboard_manage/',
+    component: DMPage,
   },
   {
     path: '/product/:id/',

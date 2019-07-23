@@ -78,7 +78,7 @@
       <f7-view id="view-analysis" name="analysis" tab url="/analysis/"></f7-view>
 
       <!-- Settings View -->
-      <f7-view id="view-settings" name="settings" tab url="/settings/"></f7-view>
+      <f7-view id="view-settings" name="settings" tab url="/setUp/"></f7-view>
     </f7-views>
 
     <!-- Popup -->

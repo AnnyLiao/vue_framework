@@ -111,8 +111,8 @@ export default {
   },
   data() {
     return {
-      tabs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      tabsC: ["一", "二", "三", "四", "五", "六", "七", "八", "九", "十"],
+      tabs: [1, 2, 3],
+      tabsC: ["一", "二", "三"],
       segment_btn: ["稼動分析", "總產量分析", "工時產量分析"],
       isBottom: true,
       headers: {
@@ -120,12 +120,7 @@ export default {
           token: "82589155"
           //   groupId: 1
         }
-      },
-      statusColor: {},
-      total: 0,
-      data: [],
-      macAddress: [],
-      indicator: null
+      }
     };
   },
   beforeMount() {
@@ -136,9 +131,9 @@ export default {
       let vm = this;
       let urlDashboard =
         "http://220.130.131.251:8887/analysisApi/wholePlant/utilizationAnalysis";
-      let now = new Date();
-      let endtime = Math.floor(now.getTime()) - 300000;
-      let starttime = endtime - 300000;
+      let yesterday = (d => new Date(d.setDate(d.getDate() - 1)))(new Date());
+      let endtime = yesterday.setHours(23, 59, 59, 999);
+      let starttime = yesterday.setHours(0, 0, 0, 0);
 
       vm.headers.headers.startTime = starttime;
       vm.headers.headers.endTime = endtime;
@@ -217,22 +212,22 @@ export default {
       series4.columns.template.fill = am4core.color("#8e8e93");
       series4.columns.template.stroke = am4core.color("#ffffff");
 
-      let cellSize = 50;
-      chart.events.on("datavalidated", function(ev) {
-        // Get objects of interest
-        let chart = ev.target;
-        let categoryAxis = chart.yAxes.getIndex(0);
+      // let cellSize = 30;
+      // chart.events.on("datavalidated", function(ev) {
+      //   // Get objects of interest
+      //   let chart = ev.target;
+      //   let categoryAxis = chart.yAxes.getIndex(0);
 
-        // Calculate how we need to adjust chart height
-        let adjustHeight =
-          chart.data.length * cellSize - categoryAxis.pixelHeight;
+      //   // Calculate how we need to adjust chart height
+      //   let adjustHeight =
+      //     chart.data.length * cellSize - categoryAxis.pixelHeight;
 
-        // get current chart height
-        let targetHeight = chart.pixelHeight + adjustHeight;
+      //   // get current chart height
+      //   let targetHeight = chart.pixelHeight + adjustHeight;
 
-        // Set it on chart's container
-        chart.svgContainer.htmlElement.style.height = targetHeight + "px";
-      });
+      //   // Set it on chart's container
+      //   chart.svgContainer.htmlElement.style.height = targetHeight + "px";
+      // });
     }
   },
   mounted() {
