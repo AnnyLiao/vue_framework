@@ -149,7 +149,7 @@ export default {
     },
     makeChart: function(data, id) {
       var chart = am4core.create("chart-" + id, am4charts.XYChart);
-      chart.height = am4core.percent(100);
+      // chart.height = am4core.percent(100);
       chart.data = data;
 
       // Create axes
@@ -212,22 +212,22 @@ export default {
       series4.columns.template.fill = am4core.color("#8e8e93");
       series4.columns.template.stroke = am4core.color("#ffffff");
 
-      // let cellSize = 30;
-      // chart.events.on("datavalidated", function(ev) {
-      //   // Get objects of interest
-      //   let chart = ev.target;
-      //   let categoryAxis = chart.yAxes.getIndex(0);
+      let cellSize = 50;
+      chart.events.on("datavalidated", function(ev) {
+        // Get objects of interest
+        let chart = ev.target;
+        let categoryAxis = chart.yAxes.getIndex(0);
 
-      //   // Calculate how we need to adjust chart height
-      //   let adjustHeight =
-      //     chart.data.length * cellSize - categoryAxis.pixelHeight;
+        // Calculate how we need to adjust chart height
+        let adjustHeight =
+          chart.data.length * cellSize - categoryAxis.pixelHeight;
 
-      //   // get current chart height
-      //   let targetHeight = chart.pixelHeight + adjustHeight;
+        // get current chart height
+        let targetHeight = chart.pixelHeight + adjustHeight;
 
-      //   // Set it on chart's container
-      //   chart.svgContainer.htmlElement.style.height = targetHeight + "px";
-      // });
+        // Set it on chart's container
+        chart.svgContainer.htmlElement.style.height = targetHeight + "px";
+      });
     }
   },
   mounted() {

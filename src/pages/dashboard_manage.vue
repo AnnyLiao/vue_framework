@@ -1,17 +1,29 @@
 <template>
   <f7-page name="catalog">
     <f7-navbar back-link="Back"></f7-navbar>
-    <f7-block >
+    <f7-block>
       <f7-row>
         <f7-col>
-          <f7-input type="select" outline id="groupId">
+          <f7-input
+            type="select"
+            outline
+            id="setUp_groupId"
+            @change="groupIdchange"
+            @input="groupIdchange"
+          >
             <option hidden>Choose</option>
             <option value="1">第一車間</option>
             <option value="2">第二車間</option>
           </f7-input>
         </f7-col>
         <f7-col>
-          <f7-input type="select" outline id="macAddress">
+          <f7-input
+            type="select"
+            outline
+            id="setUp_macAddress"
+            @change="MacAddressChange"
+            @input="MacAddressChange"
+          >
             <option hidden>Choose</option>
             <option
               v-for="(option, index) in equipment"
@@ -21,7 +33,7 @@
           </f7-input>
         </f7-col>
         <f7-col>
-          <f7-button small fill id="submit" disabled>確認</f7-button>
+          <f7-button small fill id="setUp_submit" disabled>確認</f7-button>
         </f7-col>
       </f7-row>
     </f7-block>
@@ -50,9 +62,7 @@
       </f7-list-item>
     </f7-list>
     <f7-block-footer>
-      <p class="text-align-center">
-        型創 IoM 1.0.0
-      </p>
+      <p class="text-align-center">型創 IoM 1.0.0</p>
     </f7-block-footer>
   </f7-page>
 </template>
@@ -62,8 +72,55 @@ export default {
   data: function() {
     return {
       imageLink,
-      equipment: []
+      equipment: [],
+      token: "82589155"
     };
+  },
+  methods: {
+    getEquipment: function(groupId) {
+      let vm = this;
+      let $$ = this.$$;
+      let urlDashboard = "http://220.130.131.251:8887/webApi/dashboard";
+      let headers = {
+        headers: {
+          token: vm.token,
+          groupId: groupId
+        }
+      };
+
+      Axios.get(urlDashboard, headers).then(response => {
+        vm.equipment = [];
+        if (response.data.data != null) {
+          response.data.data.forEach(function(item) {
+            vm.equipment.push({
+              MachineNumber: item.MachineNumber,
+              MacAddress: item.MacAddress,
+              MachineName: item.MachineName
+            });
+          });
+        }
+      });
+    },
+    groupIdchange(e) {
+      const selectedCode = e.target.value;
+      this.getEquipment(selectedCode);
+      // const option = this.options.find((option) => {
+      //   return selectedCode === option.code;
+      // });
+      // this.$emit("input", option);
+    },
+    MacAddressChange(e) {
+      let vm = this;
+      let $$ = this.$$;
+      const address = e.target.value;
+      vm.equipment.forEach(function(item) {
+        if (item.MacAddress == address) {
+          vm.machineName = item.MachineName;
+          vm.machineId = item.MacAddress;
+        }
+      });
+      $$("#setUp_submit").removeClass("disabled");
+    }
   }
 };
 </script>

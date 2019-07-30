@@ -2,43 +2,42 @@
   <f7-page name="about">
     <!-- <f7-navbar title="About" back-link="Back"></f7-navbar> -->
     <f7-navbar :sliding="false">
-      <f7-block no-hairlines style="width: 100%">
-        <f7-row>
-          <f7-col width="30">
-            <f7-input
-              type="select"
-              outline
-              id="groupId"
-              @change="groupIdchange"
-              @input="groupIdchange"
-            >
-              <option hidden>Choose</option>
-              <option value="1">第一車間</option>
-              <option value="2">第二車間</option>
-            </f7-input>
-          </f7-col>
-          <f7-col width="30">
-            <f7-input
-              type="select"
-              outline
-              id="macAddress"
-              @change="MacAddressChange"
-              @input="MacAddressChange"
-            >
-              <option hidden>Choose</option>
-              <option
-                v-for="(option, index) in equipment"
-                :key="index"
-                :value="option.MacAddress"
-              >設備 {{ option.MachineNumber }}</option>
-            </f7-input>
-          </f7-col>
-          <f7-col width="20">
-            <f7-button small fill @click="getMachineName" id="submit">確認</f7-button>
-          </f7-col>
-          <f7-col width="20" id="timeline_mn"></f7-col>
-        </f7-row>
-      </f7-block>
+      <div class="navbar_block">
+        <div class="navbar_item">
+          <f7-input
+            type="select"
+            outline
+            id="timeline_groupId"
+            @change="groupIdchange"
+            @input="groupIdchange"
+          >
+            <option hidden>Choose</option>
+            <option value="1">第一車間</option>
+            <option value="2">第二車間</option>
+            <option value="3">第三車間</option>
+          </f7-input>
+        </div>
+        <div class="navbar_item">
+          <f7-input
+            type="select"
+            outline
+            id="timeline_macAddress"
+            @change="MacAddressChange"
+            @input="MacAddressChange"
+          >
+            <option hidden>Choose</option>
+            <option
+              v-for="(option, index) in equipment"
+              :key="index"
+              :value="option.MacAddress"
+            >設備 {{ option.MachineNumber }}</option>
+          </f7-input>
+        </div>
+        <div class="navbar_btn">
+          <f7-button small fill @click="getMachineName" id="timeline_submit" disabled>確認</f7-button>
+        </div>
+        <div id="timeline_mn" class="navbar_item navbar_text"></div>
+      </div>
     </f7-navbar>
 
     <!-- Timeline -->
@@ -247,6 +246,7 @@ export default {
           vm.machineId = item.MacAddress;
         }
       });
+      $$("#timeline_submit").removeClass("disabled");
     },
     getMachineName() {
       let vm = this;
@@ -357,5 +357,32 @@ hr {
   background: #1e90ff;
   margin: 17px var(--f7-timeline-divider-margin-horizontal) 0;
 }
+
+/* .navbar_block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 2;
+}
+
+.navbar_item {
+  display: flex;
+  flex: 1;
+  margin: 5px;
+  flex-grow: 2;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+
+.navbar_btn {
+  display: flex;
+  flex: 1;
+  margin: 5px;
+}
+
+.navbar_text {
+  font-size: 10px;
+} */
 </style>
 

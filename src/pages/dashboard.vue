@@ -367,5 +367,6 @@ export default {
 #tab-block {
   background-color: #ddf1fb;
   color: #757575;
+  font-size: smaller;
 }
 </style>

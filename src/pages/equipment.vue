@@ -2,44 +2,42 @@
   <f7-page name="about">
     <!-- <f7-navbar title="About" back-link="Back"></f7-navbar> -->
     <f7-navbar :sliding="false">
-      <f7-block no-hairlines style="width: 100%">
-        <f7-row>
-          <f7-col width="30">
-            <f7-input
-              type="select"
-              outline
-              id="groupId"
-              @change="groupIdchange"
-              @input="groupIdchange"
-            >
-              <option hidden>Choose</option>
-              <option value="1">第一車間</option>
-              <option value="2">第二車間</option>
-              <option value="3">第三車間</option>
-            </f7-input>
-          </f7-col>
-          <f7-col width="30">
-            <f7-input
-              type="select"
-              outline
-              id="macAddress"
-              @change="MacAddressChange"
-              @input="MacAddressChange"
-            >
-              <option hidden>Choose</option>
-              <option
-                v-for="(option, index) in equipment"
-                :key="index"
-                :value="option.MacAddress"
-              >設備 {{ option.MachineNumber }}</option>
-            </f7-input>
-          </f7-col>
-          <f7-col width="20">
-            <f7-button small fill @click="getMachineName" id="submit" disabled>確認</f7-button>
-          </f7-col>
-          <f7-col width="20" id="MN"></f7-col>
-        </f7-row>
-      </f7-block>
+      <div class="navbar_block">
+        <div class="navbar_item">
+          <f7-input
+            type="select"
+            outline
+            id="groupId"
+            @change="groupIdchange"
+            @input="groupIdchange"
+          >
+            <option hidden>Choose</option>
+            <option value="1">第一車間</option>
+            <option value="2">第二車間</option>
+            <option value="3">第三車間</option>
+          </f7-input>
+        </div>
+        <div class="navbar_item">
+          <f7-input
+            type="select"
+            outline
+            id="macAddress"
+            @change="MacAddressChange"
+            @input="MacAddressChange"
+          >
+            <option hidden>Choose</option>
+            <option
+              v-for="(option, index) in equipment"
+              :key="index"
+              :value="option.MacAddress"
+            >設備 {{ option.MachineNumber }}</option>
+          </f7-input>
+        </div>
+        <div class="navbar_btn">
+          <f7-button small fill @click="getMachineName" id="submit" disabled>確認</f7-button>
+        </div>
+        <div id="MN" class="navbar_item navbar_text"></div>
+      </div>
     </f7-navbar>
     <f7-block>
       <f7-segmented raised tag="p" tabbar>
@@ -48,7 +46,6 @@
           :key="btn"
           :tab-link="`#equiptab-${index+1}`"
           :tab-link-active="index === 0"
-          @click="swpier(index)"
           outline
         >{{btn}}</f7-button>
       </f7-segmented>
@@ -180,7 +177,7 @@
         </f7-swiper-slide>
         <f7-swiper-slide>Slide 3</f7-swiper-slide>
         <f7-swiper-slide>Slide 3</f7-swiper-slide>
-      </f7-swiper> -->
+      </f7-swiper>-->
     </f7-block>
   </f7-page>
 </template>
@@ -226,17 +223,6 @@ export default {
     this.getEquipment(1);
   },
   methods: {
-    swpier(index) {
-      const self = this;
-      const app = self.$f7;
-      var $$ = this.$$;
-      $$(".segmented .button").on("click", function(e) {
-        $$(".segmented .button").removeClass("button-active");
-        $$(this).toggleClass("button-active");
-      });
-      var swiper = app.swiper.get(".swiper-container");
-      swiper.slideTo(index);
-    },
     getEquipment: function(groupId) {
       let vm = this;
       let $$ = this.$$;
@@ -428,9 +414,37 @@ export default {
   },
   mounted() {
     // this.swpier(0);
-
     // this.getEquipment(1);
   }
 };
 </script>
+<style>
+.navbar_block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 2;
+}
+
+.navbar_item {
+  display: flex;
+  flex: 1;
+  margin: 5px;
+  flex-grow: 2;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+
+.navbar_btn {
+  display: flex;
+  flex: 1;
+  margin: 5px;
+}
+
+.navbar_text {
+  font-size: 10px;
+}
+</style>
+
 
