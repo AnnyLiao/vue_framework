@@ -205,7 +205,8 @@ export default {
     f7Link,
     f7Toolbar
   },
-  data() {
+  data: function() {
+    let ip = this.$f7.data.ip;
     return {
       segment_btn: ["即時", "UAPQ", "品質", "週期"],
       colors: ["#db2828", "#eb7318", "#fbbd08", "#8ebc27", "#21ba45"],
@@ -213,8 +214,9 @@ export default {
       machineName: "",
       machineId: "",
       token: "82589155",
+      ip: ip,
       Today_UAPQ: {},
-      Interval_UAPQ: {}
+      Interval_UAPQ: {},
     };
   },
   created() {},
@@ -226,7 +228,7 @@ export default {
     getEquipment: function(groupId) {
       let vm = this;
       let $$ = this.$$;
-      let urlDashboard = "http://220.130.131.251:8887/webApi/dashboard";
+      let urlDashboard = "http://"+ vm.ip + "/webApi/dashboard";
       let headers = {
         headers: {
           token: vm.token,
@@ -274,7 +276,7 @@ export default {
       let endtime = Math.floor(now.getTime()) - 300000;
       let starttime = endtime - 300000;
       let urlDashboard =
-        "http://220.130.131.251:8887/webApi/teepByMachineIdTimeRangeInterval";
+        "http://"+ vm.ip + "/webApi/teepByMachineIdTimeRangeInterval";
       let headers = {
         headers: {
           token: vm.token,

@@ -17,7 +17,7 @@ import NotFoundPage from '../pages/404.vue';
 var routes = [{
     path: '/',
     async(routeTo, routeFrom, resolve, reject) {
-      var userLoggedIn = localStorage.getItem("logined");
+      var userLoggedIn = sessionStorage.getItem("logined");
       
       if (userLoggedIn != null) {
         

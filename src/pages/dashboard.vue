@@ -85,7 +85,8 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { contains } from "@amcharts/amcharts4/.internal/core/utils/DOM";
 export default {
-  data() {
+  data: function() {
+    let ip = this.$f7.data.ip;
     return {
       tabs: [1, 2, 3],
       tabsC: ["一", "二", "三"],
@@ -100,7 +101,8 @@ export default {
       total: 0,
       data: [],
       macAddress: [],
-      indicator: null
+      indicator: null,
+      ip: ip
     };
   },
   beforeMount() {
@@ -109,7 +111,7 @@ export default {
   methods: {
     getGroupData: function(id) {
       let vm = this;
-      let urlDashboard = "http://220.130.131.251:8887/webApi/dashboard";
+      let urlDashboard = "http://"+ vm.ip + "/webApi/dashboard";
       let Statusdata = [];
       vm.data = [];
       vm.macAddress = [];
@@ -165,7 +167,7 @@ export default {
     },
     async getMachineData(IDdata, id) {
       let vm = this;
-      let urlDashboard = "http://220.130.131.251:8887/webApi/gyrByMachineId";
+      let urlDashboard = "http://"+ vm.ip + "/webApi/gyrByMachineId";
       IDdata.forEach(function(item) {
         vm.headers.headers.machineId = item;
         Axios.get(urlDashboard, vm.headers).then(response => {

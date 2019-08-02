@@ -114,7 +114,8 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 export default {
-  data() {
+  data: function() {
+    let ip = this.$f7.data.ip;
     return {
       segment_btn: ["即時", "UAPQ", "品質", "週期"],
       colors: ["#db2828", "#eb7318", "#fbbd08", "#8ebc27", "#21ba45"],
@@ -122,7 +123,8 @@ export default {
       equipment: [],
       machineName: "",
       machineId: "",
-      token: "82589155"
+      token: "82589155",
+      ip: ip
     };
   },
   created() {},
@@ -133,7 +135,7 @@ export default {
     getEquipment: function(groupId) {
       let vm = this;
       let $$ = this.$$;
-      let urlDashboard = "http://220.130.131.251:8887/webApi/dashboard";
+      let urlDashboard = "http://"+ vm.ip + "/webApi/dashboard";
       let headers = {
         headers: {
           token: vm.token,
@@ -158,7 +160,7 @@ export default {
       let vm = this;
       let $$ = this.$$;
       let urlDashboard =
-        "http://220.130.131.251:8887/webApi/nextScheduleByMachineId";
+        "http://"+ vm.ip + "/webApi/nextScheduleByMachineId";
       let headers = {
         headers: {
           token: vm.token,

@@ -146,8 +146,10 @@ export default {
           return {
             user: {
               firstName: "John",
-              lastName: "Doe"
+              lastName: "Doe",
+              
             },
+            ip: localStorage.getItem("ip"),
             // Demo products for Catalog section
             products: [
               {

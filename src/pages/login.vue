@@ -16,6 +16,13 @@
         :value="password"
         @input="password = $event.target.value"
       ></f7-list-input>
+      <f7-list-input
+        label="IP"
+        type="text"
+        placeholder="IP"
+        :value="ip"
+        @input="ip = $event.target.value"
+      ></f7-list-input>
     </f7-list>
     <f7-list>
       <f7-list-button @click="signIn">Sign In</f7-list-button>
@@ -28,11 +35,13 @@
 </template>
 
 <script>
+import md5 from "js-md5";
 export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      ip: ""
     };
   },
   methods: {
@@ -40,10 +49,12 @@ export default {
       const self = this;
       const app = self.$f7;
       const router = self.$f7router;
+      localStorage.clear();
+      sessionStorage.setItem("logined", true);
+      localStorage.setItem("ip", self.ip);
       app.dialog.alert(
-        `Username: ${self.username}<br>Password: ${self.password}`,
+        `Username: ${self.username}<br>Password: ${md5(self.password)}`,
         () => {
-          localStorage.setItem("logined", true);
           router.navigate(router.currentRoute.url, {
             reloadCurrent: true,
             ignoreCache: true

@@ -109,7 +109,8 @@ export default {
     f7Link,
     f7Toolbar
   },
-  data() {
+  data: function() {
+    let ip = this.$f7.data.ip;
     return {
       tabs: [1, 2, 3],
       tabsC: ["一", "二", "三"],
@@ -120,7 +121,9 @@ export default {
           token: "82589155"
           //   groupId: 1
         }
-      }
+      },
+      token: "",
+      ip: ip
     };
   },
   beforeMount() {
@@ -130,7 +133,7 @@ export default {
     getGroupData: function(id) {
       let vm = this;
       let urlDashboard =
-        "http://220.130.131.251:8887/analysisApi/wholePlant/utilizationAnalysis";
+        "http://" + vm.ip + "/analysisApi/wholePlant/utilizationAnalysis";
       let yesterday = (d => new Date(d.setDate(d.getDate() - 1)))(new Date());
       let endtime = yesterday.setHours(23, 59, 59, 999);
       let starttime = yesterday.setHours(0, 0, 0, 0);

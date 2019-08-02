@@ -70,17 +70,19 @@
 import imageLink from "../static/cordova-android-icon.png";
 export default {
   data: function() {
+    let ip = this.$f7.data.ip;
     return {
       imageLink,
       equipment: [],
-      token: "82589155"
+      token: "82589155",
+      ip: ip
     };
   },
   methods: {
     getEquipment: function(groupId) {
       let vm = this;
       let $$ = this.$$;
-      let urlDashboard = "http://220.130.131.251:8887/webApi/dashboard";
+      let urlDashboard = "http://" + vm.ip + "/webApi/dashboard";
       let headers = {
         headers: {
           token: vm.token,
